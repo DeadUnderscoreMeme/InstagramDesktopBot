@@ -36,6 +36,9 @@ class InstagramBot:
         follow_button = self.driver.find_element_by_css_selector('#react-root > section > main > div > header > section > div.nZSzR > div.Igw0E.IwRSH.eGOV_._4EzTm > span > span.vBF20._1OSdk > button')
         follow_button.click()
 
+    
+    
+
 
 
 if __name__ == '__main__':
