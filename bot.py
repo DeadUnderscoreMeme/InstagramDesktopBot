@@ -36,11 +36,20 @@ class InstagramBot:
         follow_button = self.driver.find_element_by_css_selector('#react-root > section > main > div > header > section > div.nZSzR > div.Igw0E.IwRSH.eGOV_._4EzTm > span > span.vBF20._1OSdk > button')
         follow_button.click()
 
-    
+    def scroll_by_value(self, value):
+        self.driver.execute_script('window.scrollBy(0,[])'.format(value))
+
+
+    def like_images(self,):
+        like_button_array = self.driver.find_element_by_tag_name('span')
+        print(like_button_array)
     
 
 
 
 if __name__ == '__main__':
-        ig_bot = InstagramBot('_dead_meme_pvt_', 'Hrishi$00')
+        ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
+        ig_bot.login()
+        time.sleep(10)
+        ig_bot.like_images()
         
