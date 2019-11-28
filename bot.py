@@ -37,12 +37,14 @@ class InstagramBot:
         follow_button.click()
 
     def scroll_by_value(self, value):
-        self.driver.execute_script('window.scrollBy(0,[])'.format(value))
+        for i in range(1,43):
+            self.driver.execute_script('window.scrollBy(0,{})'.format(value))
 
 
-    def like_images(self,):
+    def like_image(self,):
         like_button_array = self.driver.find_element_by_tag_name('span')
         print(like_button_array)
+        #like_button_array.click()
     
 
 
@@ -51,5 +53,7 @@ if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
         time.sleep(10)
-        ig_bot.like_images()
+        ig_bot.like_image()
+        ig_bot.scroll_by_value(1000)
+        time.sleep(4)
         
