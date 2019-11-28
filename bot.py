@@ -42,9 +42,13 @@ class InstagramBot:
 
 
     def like_image(self,):
-        like_button_array = self.driver.find_element_by_tag_name('span')
-        print(like_button_array)
-        #like_button_array.click()
+        like_button = self.driver.find_element_by_tag_name('span')
+        print(like_button)
+        like_button.click()
+
+    def find_images(self,):
+        image_list = self.driver.find_element_by_tag_name('img')
+        print(image_list)
     
 
 
@@ -53,7 +57,7 @@ if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
         time.sleep(3)
-        ig_bot.like_image()
-        ig_bot.scroll_by_value(35)
-        time.sleep(1)
+        ig_bot.find_images()
+        #ig_bot.scroll_by_value(43)
+        #time.sleep(1)
         
