@@ -38,7 +38,7 @@ class InstagramBot:
 
     def scroll_by_value(self, value): #for smooth post by post scrolling use values from 20 - 30
         for i in range(1,value):
-            self.driver.execute_script('window.scrollBy(0,{})'.format(value))
+            self.driver.execute_script('window.scrollBy(0,{})'.format(i))
 
 
     def like_image(self,):
