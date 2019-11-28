@@ -36,8 +36,8 @@ class InstagramBot:
         follow_button = self.driver.find_element_by_css_selector('#react-root > section > main > div > header > section > div.nZSzR > div.Igw0E.IwRSH.eGOV_._4EzTm > span > span.vBF20._1OSdk > button')
         follow_button.click()
 
-    def scroll_by_value(self, value):
-        for i in range(1,43):
+    def scroll_by_value(self, value): #for smooth post by post scrolling use values from 20 - 30
+        for i in range(1,value):
             self.driver.execute_script('window.scrollBy(0,{})'.format(value))
 
 
@@ -52,8 +52,8 @@ class InstagramBot:
 if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
-        time.sleep(10)
+        time.sleep(3)
         ig_bot.like_image()
-        ig_bot.scroll_by_value(1000)
-        time.sleep(4)
+        ig_bot.scroll_by_value(35)
+        time.sleep(1)
         
