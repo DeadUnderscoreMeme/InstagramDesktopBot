@@ -46,9 +46,12 @@ class InstagramBot:
         print(like_button)
         like_button.click()
 
-    def find_images(self,):
-        image_list = self.driver.find_element_by_tag_name('img')
-        print(image_list)
+    def find_posts(self,):
+        image_list = self.driver.find_elements_by_tag_name('img')
+        num = 1
+        for element in image_list:
+            print("{} : {} Image Link is : \n {} \n".format(num,element.get_attribute('alt'),element.get_attribute('src')))
+            num += 1
     
 
 
@@ -56,8 +59,8 @@ class InstagramBot:
 if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
-        time.sleep(3)
-        ig_bot.find_images()
-        #ig_bot.scroll_by_value(43)
-        #time.sleep(1)
+        time.sleep(2)
+        ig_bot.find_posts()
+        # ig_bot.scroll_by_value(43)
+        # time.sleep(1)
         
