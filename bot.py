@@ -26,7 +26,6 @@ class InstagramBot:
         self.driver.find_element_by_css_selector('body > div.RnEpo.Yx5HN > div > div > div.mt3GC > button.aOOlW.HoLwm').click()
 
         
-
     def nav_user(self, user):
         self.driver.get('{}/{}'.format(self.base_url,user))
 
@@ -36,6 +35,7 @@ class InstagramBot:
         follow_button = self.driver.find_element_by_css_selector('#react-root > section > main > div > header > section > div.nZSzR > div.Igw0E.IwRSH.eGOV_._4EzTm > span > span.vBF20._1OSdk > button')
         follow_button.click()
 
+    
     def scroll_by_value(self, value): #for smooth post by post scrolling use values from 20 - 30
         for i in range(1,value):
             self.driver.execute_script('window.scrollBy(0,{})'.format(i))
@@ -45,22 +45,41 @@ class InstagramBot:
         like_button = self.driver.find_element_by_tag_name('span')
         print(like_button)
         like_button.click()
-
-    def find_posts(self,):
-        image_list = self.driver.find_elements_by_tag_name('img')
-        num = 1
-        for element in image_list:
-            print("{} : {} Image Link is : \n {} \n".format(num,element.get_attribute('alt'),element.get_attribute('src')))
-            num += 1
     
 
+    def find_images(self,):
+        image_list = self.driver.find_elements_by_tag_name('img')
+        num = 1
+        displaypic_list = []
+        # post_images_list = []
+        for element in image_list:
+            # print("{} : {} Image Link is : \n {} \n".format(num,element.get_attribute('alt'),element.get_attribute('src')))
+            num += 1
+            alt_str = element.get_attribute('alt')
+            print(alt_str)
+            if 'profile picture' in alt_str:
+                # print(True)
+                print('The Profile pics are : {}'.format(element.get_attribute('alt')))
+                displaypic_list.append(element)
+            # else:
+                # print('The Image posts are : {}'.format(element.get_attribute('alt')))
+                # post_images_list.append(element)
+            
+        # print ('The profile pics are : {}'.format(displaypic_list))
+        # print ('The image posts are : {}'.format(post_images_list))
+        self.find_posts(image_list)
+
+    def find_posts(self,images):
+        self.images = images
+        # post = images.get_element_by_xpath('..')
 
 
 if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
         time.sleep(2)
-        ig_bot.find_posts()
+        ig_bot.find_images()
         # ig_bot.scroll_by_value(43)
         # time.sleep(1)
         
+   
