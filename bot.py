@@ -51,23 +51,26 @@ class InstagramBot:
         image_list = self.driver.find_elements_by_tag_name('img')
         num = 1
         displaypic_list = []
-        # post_images_list = []
+        post_images_list = []
         for element in image_list:
             # print("{} : {} Image Link is : \n {} \n".format(num,element.get_attribute('alt'),element.get_attribute('src')))
             num += 1
             alt_str = element.get_attribute('alt')
-            print(alt_str)
             if 'profile picture' in alt_str:
-                # print(True)
-                print('The Profile pics are : {}'.format(element.get_attribute('alt')))
                 displaypic_list.append(element)
-            # else:
-                # print('The Image posts are : {}'.format(element.get_attribute('alt')))
-                # post_images_list.append(element)
+            else :
+                post_images_list.append(element)
             
-        # print ('The profile pics are : {}'.format(displaypic_list))
-        # print ('The image posts are : {}'.format(post_images_list))
-        self.find_posts(image_list)
+        # print ('The profile pics are: \n')
+        
+        # for ele in displaypic_list:
+        #     print(ele.get_attribute('alt'))
+
+        print ('The image posts are : \n')
+
+        for ele in post_images_list:
+            print(ele.get_attribute('alt'))
+
 
     def find_posts(self,images):
         self.images = images
