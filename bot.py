@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 import os
 import time
 
@@ -72,12 +73,15 @@ class InstagramBot:
     def find_posts_by_image(self,):
         self.post_list = []
         for element in self.post_images_list:
-            self.post_list.append(element.find_element_by_xpath('../../../../..'))
-        
-        for element in self.post_list:
-            print(element.get_attribute('class'))
-        
-        print('end1')
+            # print(element.get_attribute('src'))
+            parent = element.find_element_by_xpath('../../../../..')
+            print(parent.get_attribute('class'))
+            self.post_list.append(parent)
+            # print(parent)
+        print(self.post_list)
+        # for element in self.post_list:
+        #     print(element.get_attribute('class'))
+
 
     def find_posts_by_pfp(self,):
         self.post_list_by_pfp = []
@@ -87,14 +91,23 @@ class InstagramBot:
         for element in self.post_list_by_pfp:
             print(element.get_attribute('class'))
 
-        print('end2')
 
+    def find_like_button_of_post(self,):
+        self.like_buttons = []
+        
+        for element in self.post_list:
+            like_button = element.find_element_by_xpath("./div[2]/section[1]/span[1]/button/*[contains(@class,'Heart')]")
+            self.like_buttons.append(like_button)
+            # print(element.find_element_by_xpath("./div[2]/section[1]/span[1]/button/*[contains(@class,'Heart')]").get_attribute('class'))
+
+        for element in self.like_buttons:
+            print(element.get_attribute('aria-label'))
 
 if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
-        time.sleep(2)
+        time.sleep(1)
         ig_bot.find_images()
         ig_bot.find_posts_by_image()
-        ig_bot.find_posts_by_pfp()
+        ig_bot.find_like_button_of_post()
    
