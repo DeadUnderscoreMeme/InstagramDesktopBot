@@ -48,33 +48,46 @@ class InstagramBot:
     
 
     def find_images(self,):
-        image_list = self.driver.find_elements_by_tag_name('img')
-        num = 1
-        displaypic_list = []
-        post_images_list = []
-        for element in image_list:
+        self.image_list = self.driver.find_elements_by_tag_name('img')
+
+        self.displaypic_list = []
+        self.post_images_list = []
+        for element in self.image_list:
             # print("{} : {} Image Link is : \n {} \n".format(num,element.get_attribute('alt'),element.get_attribute('src')))
-            num += 1
             alt_str = element.get_attribute('alt')
             if 'profile picture' in alt_str:
-                displaypic_list.append(element)
+                self.displaypic_list.append(element)
             else :
-                post_images_list.append(element)
-            
+                self.post_images_list.append(element)
+
         # print ('The profile pics are: \n')
-        
         # for ele in displaypic_list:
         #     print(ele.get_attribute('alt'))
 
-        print ('The image posts are : \n')
+        # print ('The image posts are : \n')
+        # for ele in post_images_list:
+        #     print(ele.get_attribute('alt'))
 
-        for ele in post_images_list:
-            print(ele.get_attribute('alt'))
 
+    def find_posts_by_image(self,):
+        self.post_list = []
+        for element in self.post_images_list:
+            self.post_list.append(element.find_element_by_xpath('../../../../..'))
+        
+        for element in self.post_list:
+            print(element.get_attribute('class'))
+        
+        print('end1')
 
-    def find_posts(self,images):
-        self.images = images
-        # post = images.get_element_by_xpath('..')
+    def find_posts_by_pfp(self,):
+        self.post_list_by_pfp = []
+        for element in self.displaypic_list:
+            self.post_list_by_pfp.append(element.find_element_by_xpath('../../../..'))
+        
+        for element in self.post_list_by_pfp:
+            print(element.get_attribute('class'))
+
+        print('end2')
 
 
 if __name__ == '__main__':
@@ -82,7 +95,6 @@ if __name__ == '__main__':
         ig_bot.login()
         time.sleep(2)
         ig_bot.find_images()
-        # ig_bot.scroll_by_value(43)
-        # time.sleep(1)
-        
+        ig_bot.find_posts_by_image()
+        ig_bot.find_posts_by_pfp()
    
