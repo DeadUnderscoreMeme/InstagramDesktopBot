@@ -75,10 +75,10 @@ class InstagramBot:
         for element in self.post_images_list:
             # print(element.get_attribute('src'))
             parent = element.find_element_by_xpath('//ancestor::article')
-            print(parent.get_attribute('class'))
+            # print(parent.get_attribute('class'))
             self.post_list.append(parent)
             # print(parent)
-        print(self.post_list)
+        # print(self.post_list)
         # for element in self.post_list:
         #     print(element.get_attribute('class'))
 
@@ -88,8 +88,8 @@ class InstagramBot:
         for element in self.displaypic_list:
             self.post_list_by_pfp.append(element.find_element_by_xpath('../../../..'))
         
-        for element in self.post_list_by_pfp:
-            print(element.get_attribute('class'))
+        # for element in self.post_list_by_pfp:
+        #     print(element.get_attribute('class'))
 
 
     def find_like_button_of_post(self,):
