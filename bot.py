@@ -54,33 +54,18 @@ class InstagramBot:
         self.displaypic_list = []
         self.post_images_list = []
         for element in self.image_list:
-            # print("{} : {} Image Link is : \n {} \n".format(num,element.get_attribute('alt'),element.get_attribute('src')))
             alt_str = element.get_attribute('alt')
             if 'profile picture' in alt_str:
                 self.displaypic_list.append(element)
             else :
                 self.post_images_list.append(element)
 
-        # print ('The profile pics are: \n')
-        # for ele in displaypic_list:
-        #     print(ele.get_attribute('alt'))
-
-        # print ('The image posts are : \n')
-        # for ele in post_images_list:
-        #     print(ele.get_attribute('alt'))
-
 
     def find_posts_by_image(self,):
         self.post_list = []
         for element in self.post_images_list:
-            # print(element.get_attribute('src'))
             parent = element.find_element_by_xpath('//ancestor::article')
-            # print(parent.get_attribute('class'))
             self.post_list.append(parent)
-            # print(parent)
-        # print(self.post_list)
-        # for element in self.post_list:
-        #     print(element.get_attribute('class'))
 
 
     def find_posts_by_pfp(self,):
@@ -88,9 +73,6 @@ class InstagramBot:
         for element in self.displaypic_list:
             self.post_list_by_pfp.append(element.find_element_by_xpath('../../../..'))
         
-        # for element in self.post_list_by_pfp:
-        #     print(element.get_attribute('class'))
-
 
     def find_like_button_of_post(self,):
         self.like_buttons = []
@@ -98,10 +80,14 @@ class InstagramBot:
         for element in self.post_list:
             like_button = element.find_element_by_xpath("./div[2]/section[1]/span[1]/button/*[contains(@class,'Heart')]")
             self.like_buttons.append(like_button)
-            # print(element.find_element_by_xpath("./div[2]/section[1]/span[1]/button/*[contains(@class,'Heart')]").get_attribute('class'))
 
-        for element in self.like_buttons:
-            print(element.get_attribute('aria-label'))
+    def find_comment_button_of_post(self,):
+        self.comment_buttons = []
+        
+        for element in self.post_list:
+            comment_button = element.find_element_by_xpath("./div[2]/section[1]/span[2]/button/*[contains(@class,'Comment')]")
+            self.comment_buttons.append(comment_button)
+
 
 if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
@@ -110,4 +96,4 @@ if __name__ == '__main__':
         ig_bot.find_images()
         ig_bot.find_posts_by_image()
         ig_bot.find_like_button_of_post()
-   
+        ig_bot.find_comment_button_of_post()
