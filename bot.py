@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 import os
 import time
+import utility_methods
 
 
 class InstagramBot:
@@ -64,14 +65,18 @@ class InstagramBot:
     def find_posts_by_image(self,):
         self.post_list = []
         for element in self.post_images_list:
-            parent = element.find_element_by_xpath('//ancestor::article')
+            index = self.post_images_list.index(element) + 1
+            parent = element.find_element_by_xpath('//ancestor::article[{}]'.format(index))
             self.post_list.append(parent)
+        
+        for element in self.post_list:
+            print(element.find_element_by_xpath('./div[1]/div/div/div[1]/img').get_attribute('src'))
 
 
     def find_posts_by_pfp(self,):
         self.post_list_by_pfp = []
         for element in self.displaypic_list:
-            self.post_list_by_pfp.append(element.find_element_by_xpath('../../../..'))
+            self.post_list_by_pfp.append(element.find_element_by_xpath('//ancestor::article'))
         
 
     def find_like_button_of_post(self,):
@@ -88,6 +93,8 @@ class InstagramBot:
             comment_button = element.find_element_by_xpath("./div[2]/section[1]/span[2]/button/*[contains(@class,'Comment')]")
             self.comment_buttons.append(comment_button)
 
+    def find_scraping(self,):
+        utility_methods.scrape_keywords(self.post_list)
 
 if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
@@ -95,5 +102,6 @@ if __name__ == '__main__':
         time.sleep(1)
         ig_bot.find_images()
         ig_bot.find_posts_by_image()
-        ig_bot.find_like_button_of_post()
-        ig_bot.find_comment_button_of_post()
+        # ig_bot.find_like_button_of_post()
+        # ig_bot.find_comment_button_of_post()
+        # ig_bot.find_scraping()
