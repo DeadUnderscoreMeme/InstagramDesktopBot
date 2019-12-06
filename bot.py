@@ -74,7 +74,7 @@ class InstagramBot:
         self.post_list = []
         for element in self.post_images_list:
             # print(element.get_attribute('src'))
-            parent = element.find_element_by_xpath('../../../../..')
+            parent = element.find_element_by_xpath('//ancestor::article')
             print(parent.get_attribute('class'))
             self.post_list.append(parent)
             # print(parent)
