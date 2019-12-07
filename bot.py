@@ -80,14 +80,6 @@ class InstagramBot:
                     print(a)
                     get_out = True
 
-        print('Classes are : ')
-        for element in self.post_list:
-            print(element.find_element_by_xpath('./*[contains(@srcset,"http")]').get_attribute('src'))
-        # for element in self.post_list:
-            # index = self.post_images_list.index(element) + 1
-
-            # print(element.find_element_by_xpath('.//div/div/div/div[1]/div[1]/img').get_attribute('src'))
-
 
     def find_posts_by_pfp(self,):
         self.post_list_by_pfp = []
@@ -95,8 +87,8 @@ class InstagramBot:
             self.post_list_by_pfp.append(element.find_element_by_xpath('//ancestor::article'))
 
     def find_posts(self,):
-        post_list_by_tag = self.driver.find_elements_by_xpath('//article')
-        for element in post_list_by_tag:
+        self.post_list = self.driver.find_elements_by_xpath('//article')
+        for element in self.post_list:
             print(element.get_attribute('class'))
 
     def find_like_button_of_post(self,):
