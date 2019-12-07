@@ -65,12 +65,15 @@ class InstagramBot:
     def find_posts_by_image(self,):
         self.post_list = []
         for element in self.post_images_list:
-            index = self.post_images_list.index(element) + 1
-            parent = element.find_element_by_xpath('//ancestor::article[{}]'.format(index))
+            # index = self.post_images_list.index(element) + 1
+            parent = element.find_element_by_xpath("//ancestor::article[contains(@class,'')]")
             self.post_list.append(parent)
+            print(parent.get_attribute('class'))
         
         for element in self.post_list:
-            print(element.find_element_by_xpath('./div[1]/div/div/div[1]/img').get_attribute('src'))
+            # index = self.post_images_list.index(element) + 1
+
+            print(element.find_element_by_xpath('.//div/div/div/div[1]/div[1]/img').get_attribute('src'))
 
 
     def find_posts_by_pfp(self,):
