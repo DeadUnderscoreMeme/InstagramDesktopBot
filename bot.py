@@ -88,16 +88,16 @@ class InstagramBot:
 
             # print(element.find_element_by_xpath('.//div/div/div/div[1]/div[1]/img').get_attribute('src'))
 
-    def find_posts_by_tag(self,):
-        post_list_by_tag = self.driver.find_elements_by_xpath('//article')
-        for element in post_list_by_tag:
-            print(element.get_attribute('class'))
 
     def find_posts_by_pfp(self,):
         self.post_list_by_pfp = []
         for element in self.displaypic_list:
             self.post_list_by_pfp.append(element.find_element_by_xpath('//ancestor::article'))
-        
+
+    def find_posts(self,):
+        post_list_by_tag = self.driver.find_elements_by_xpath('//article')
+        for element in post_list_by_tag:
+            print(element.get_attribute('class'))
 
     def find_like_button_of_post(self,):
         self.like_buttons = []
@@ -120,7 +120,7 @@ if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
         time.sleep(1)
-        ig_bot.find_posts_by_tag()
+        ig_bot.find_posts()
         # ig_bot.find_like_button_of_post()
         # ig_bot.find_comment_button_of_post()
         # ig_bot.find_scraping()
