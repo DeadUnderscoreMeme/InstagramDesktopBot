@@ -5,7 +5,7 @@ This is a desktop client that allows you to view your Instagram stats, posts and
 >What you can do with this client right now is : <br>
 
 1. Login, find users and follow users
-2. Features will _obviously_ be updated
+2. Features for 
 3. Watch this space for more **additions**.
 4. This is not a meme
 
