@@ -28,11 +28,11 @@ class InstagramBot:
         self.driver.find_element_by_css_selector('body > div.RnEpo.Yx5HN > div > div > div.mt3GC > button.aOOlW.HoLwm').click()
 
         
-    def nav_user(self, user):
+    def nav_user(self, user): #Navigates to user if you pass it as an argument
         self.driver.get('{}/{}'.format(self.base_url,user))
 
 
-    def follow_user(self, user):
+    def follow_user(self, user): #Follows the user that you pass to it as an argument
         self.nav_user(user)
         follow_button = self.driver.find_element_by_css_selector('#react-root > section > main > div > header > section > div.nZSzR > div.Igw0E.IwRSH.eGOV_._4EzTm > span > span.vBF20._1OSdk > button')
         follow_button.click()
@@ -49,7 +49,7 @@ class InstagramBot:
         like_button.click()
     
 
-    def find_images(self,):
+    def find_images(self,): #Use this just to randomly access images instead of the posts themselves
         self.image_list = self.driver.find_elements_by_tag_name('img')
         self.displaypic_list = []
         self.post_images_list = []
@@ -61,7 +61,7 @@ class InstagramBot:
                 self.post_images_list.append(element)
 
 
-    def find_posts_by_image(self,):
+    def find_posts_by_image(self,): #Deprecated, doesn't work so you might as well not use it
         self.post_list = []
         for element in self.post_images_list:
             get_out = False
@@ -81,7 +81,7 @@ class InstagramBot:
                     get_out = True
 
 
-    def find_posts_by_pfp(self,):
+    def find_posts_by_pfp(self,): #Deprecated, doesn't work so you might as well not use it
         self.post_list_by_pfp = []
         for element in self.displaypic_list:
             self.post_list_by_pfp.append(element.find_element_by_xpath('//ancestor::article'))
@@ -93,17 +93,32 @@ class InstagramBot:
 
     def find_like_button_of_post(self,):
         self.like_buttons = []
+        self.like_buttons = self.driver.find_elements_by_xpath("//*[contains(@class,'Heart')]")
         
-        for element in self.post_list:
-            like_button = element.find_element_by_xpath("./div[2]/section[1]/span[1]/button/*[contains(@class,'Heart')]")
-            self.like_buttons.append(like_button)
+        for element in self.like_buttons:
+            print(element.get_attribute('class'))
 
     def find_comment_button_of_post(self,):
         self.comment_buttons = []
+        self.comment_buttons = self.driver.find_elements_by_xpath("//*[contains(@aria-label,'Comment')]")
         
-        for element in self.post_list:
-            comment_button = element.find_element_by_xpath("./div[2]/section[1]/span[2]/button/*[contains(@class,'Comment')]")
-            self.comment_buttons.append(comment_button)
+        for element in self.comment_buttons:
+            print(element.get_attribute('class'))
+
+    def find_share_button_of_post(self,):
+        self.share_buttons = []
+        self.share_buttons = self.driver.find_elements_by_xpath("//*[contains(@aria-label,'Share Post')]")
+        
+        for element in self.share_buttons:
+            print(element.get_attribute('class'))
+
+    def find_comment_blank_of_post(self,):
+        self.comment_blanks = []
+        self.comment_blanks = self.driver.find_elements_by_xpath("//*[contains(@aria-label,'Add a comment…')]")
+        
+        for element in self.comment_blanks:
+            print(element.get_attribute('placeholder'))
+
 
     def find_scraping(self,):
         utility_methods.scrape_keywords(self.post_list)
@@ -113,6 +128,6 @@ if __name__ == '__main__':
         ig_bot.login()
         time.sleep(1)
         ig_bot.find_posts()
-        # ig_bot.find_like_button_of_post()
-        # ig_bot.find_comment_button_of_post()
-        # ig_bot.find_scraping()
+        ig_bot.find_like_button_of_post()
+        ig_bot.find_comment_blank_of_post()
+        ig_bot.find_share_button_of_post()
