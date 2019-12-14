@@ -3,7 +3,7 @@ from selenium.common.exceptions import NoSuchElementException
 import os
 import time
 import utility_methods
-
+import random
 
 class InstagramBot:
 
@@ -119,6 +119,20 @@ class InstagramBot:
         for element in self.comment_blanks:
             print(element.get_attribute('placeholder'))
 
+    def view_all_stories(self,):
+        # self.story_button = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/main/section/div[3]/div[2]/div[1]/a/div')
+        self.story_button = self.driver.find_element_by_partial_link_text('Watch All')
+        print(self.story_button.get_attribute('partial-link-text'))
+        self.story_button.click()
+
+        try:
+            while(True):
+                time.sleep(1.5)
+                self.next_story = self.driver.find_element_by_class_name('coreSpriteRightChevron')
+                self.next_story.click()
+
+        except NoSuchElementException:
+            print('Stories done')
 
     def find_scraping(self,):
         utility_methods.scrape_keywords(self.post_list)
@@ -127,7 +141,8 @@ if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
         time.sleep(1)
-        ig_bot.find_posts()
-        ig_bot.find_like_button_of_post()
-        ig_bot.find_comment_blank_of_post()
-        ig_bot.find_share_button_of_post()
+        # ig_bot.find_posts()
+        # ig_bot.find_like_button_of_post()
+        # ig_bot.find_comment_blank_of_post()
+        # ig_bot.find_share_button_of_post()
+        ig_bot.view_all_stories()

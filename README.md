@@ -15,9 +15,11 @@ The basic functions of this bot are : <br>
     4. Like Button
     5. Comment Space
     6. Share Button
-
+3. With Stories
+    1. View all stories of the user
+    
 **Coming Soon**
-1. *View and interact with stories*
+1. *Interact with stories*
 2. *Parse and reverse search images*
 3. *Create interest lists for bots*
 4. *Generate Keyword list for every image*
