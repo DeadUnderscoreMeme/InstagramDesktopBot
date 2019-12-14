@@ -151,6 +151,24 @@ class InstagramBot:
         except NoSuchElementException:
             print('Stories done')
 
+    def view_all_suggestions(self,):
+        # self.find_images()
+        self.view_suggestions = self.driver.find_element_by_partial_link_text('See All')
+        self.view_suggestions.click()
+        
+        self.suggestions_list = []
+        self.div_list = self.driver.find_elements_by_tag_name('img')
+
+        for element in self.suggestions_list:
+            if element.get_attribute('aria-labelledby'):
+                self.suggestions_list.append(element)
+                    
+        
+        for element in self.suggestions_list:
+            print(element.get_atribute('class'))
+
+
+
     def find_scraping(self,):
         utility_methods.scrape_keywords(self.post_list)
 
@@ -158,9 +176,11 @@ if __name__ == '__main__':
         ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
         ig_bot.login()
         time.sleep(1)
+        # All functional functions are
         # ig_bot.find_posts()
         # ig_bot.find_like_button_of_post()
         # ig_bot.find_comment_blank_of_post()
         # ig_bot.find_share_button_of_post()
         # ig_bot.view_all_stories()
-        ig_bot.view_story_of_user('Rebellious.liberty')
+        # ig_bot.view_story_of_user()
+        ig_bot.view_all_suggestions()

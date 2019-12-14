@@ -17,7 +17,8 @@ The basic functions of this bot are : <br>
     6. Share Button
 3. With Stories
     1. View all stories of the user
-    
+    2. View Stories of a specific user after visting their profile
+
 **Coming Soon**
 1. *Interact with stories*
 2. *Parse and reverse search images*
