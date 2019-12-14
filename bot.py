@@ -134,6 +134,23 @@ class InstagramBot:
         except NoSuchElementException:
             print('Stories done')
 
+    def view_story_of_user(self,username):
+        self.username = username
+        self.nav_user(username)
+        self.view_story = self.driver.find_element_by_tag_name('img')
+
+        if 'profile picture' in self.view_story.get_attribute('alt'):
+            self.view_story.click()
+            
+        try:
+            while(True):
+                time.sleep(1.5)
+                self.next_story = self.driver.find_element_by_class_name('coreSpriteRightChevron')
+                self.next_story.click()
+
+        except NoSuchElementException:
+            print('Stories done')
+
     def find_scraping(self,):
         utility_methods.scrape_keywords(self.post_list)
 
@@ -145,4 +162,5 @@ if __name__ == '__main__':
         # ig_bot.find_like_button_of_post()
         # ig_bot.find_comment_blank_of_post()
         # ig_bot.find_share_button_of_post()
-        ig_bot.view_all_stories()
+        # ig_bot.view_all_stories()
+        ig_bot.view_story_of_user('Rebellious.liberty')
