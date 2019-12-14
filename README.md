@@ -18,9 +18,11 @@ The basic functions of this bot are : <br>
 3. With Stories
     1. View all stories of the user
     2. View Stories of a specific user after visting their profile
+    3. View Suggestion list for your account
 
 **Coming Soon**
 1. *Interact with stories*
+2. *Parse Suggestion names and follow according to interest*
 2. *Parse and reverse search images*
 3. *Create interest lists for bots*
 4. *Generate Keyword list for every image*
