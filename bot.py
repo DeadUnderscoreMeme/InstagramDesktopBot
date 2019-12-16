@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 import os
 import time
 import utility_methods
@@ -11,7 +12,12 @@ class InstagramBot:
         self.username = username
         self.password = password
         self.base_url = 'https://www.instagram.com'
+        opts = Options()
+
+        opts.add_argument("user-agent=Chrome --- Android Mobile")
+
         self.driver = webdriver.Chrome('chromedriver.exe')
+
 
         
 
@@ -20,10 +26,10 @@ class InstagramBot:
         self.driver.get('{}/accounts/login/?source=auth_switcher'.format(self.base_url))
         self.driver.maximize_window()
         self.driver.implicitly_wait(30)
-        self.driver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(2) > div > label > input').send_keys(self.username)
-        self.driver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(3) > div > label > input').send_keys(self.password)
+        self.driver.find_element_by_xpath('//*[contains(@name, "username")]').send_keys(self.username)
+        self.driver.find_element_by_xpath('//*[contains(@name, "password")]').send_keys(self.password)
         self.driver.implicitly_wait(30)
-        self.driver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(4) > button > div').click()
+        self.driver.find_element_by_xpath('//*[contains(@type,"submit")]').click()
         self.driver.implicitly_wait(30)
         self.driver.find_element_by_css_selector('body > div.RnEpo.Yx5HN > div > div > div.mt3GC > button.aOOlW.HoLwm').click()
 
@@ -173,14 +179,14 @@ class InstagramBot:
         utility_methods.scrape_keywords(self.post_list)
 
 if __name__ == '__main__':
-        ig_bot = InstagramBot('__dead__meme__', 'Hrishi$00')
+        ig_bot = InstagramBot('_dead_meme_pvt_', 'Hrishi$00')
         ig_bot.login()
         time.sleep(1)
         # All functional functions are
-        # ig_bot.find_posts()
-        # ig_bot.find_like_button_of_post()
-        # ig_bot.find_comment_blank_of_post()
-        # ig_bot.find_share_button_of_post()
-        # ig_bot.view_all_stories()
-        # ig_bot.view_story_of_user()
+        ig_bot.find_posts()
+        ig_bot.find_like_button_of_post()
+        ig_bot.find_comment_blank_of_post()
+        ig_bot.find_share_button_of_post()
+        ig_bot.view_all_stories()
+        ig_bot.view_story_of_user('username')
         ig_bot.view_all_suggestions()
