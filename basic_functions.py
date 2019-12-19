@@ -173,13 +173,15 @@ class InstagramBot:
         for element in self.suggestions_list:
             print(element.get_atribute('class'))
 
-
+    # def get_hashtags_of_posts(self,):
+    #     self.hashtags_dict = {}
+    #     for element in self.image_list:
 
     def find_scraping(self,):
         utility_methods.scrape_keywords(self.post_list)
 
 if __name__ == '__main__':
-        ig_bot = InstagramBot('_dead_meme_pvt_', 'Hrishi$00')
+        ig_bot = InstagramBot('__dead__meme__', 'Reeve123')
         ig_bot.login()
         time.sleep(1)
         # All functional functions are
@@ -188,5 +190,5 @@ if __name__ == '__main__':
         ig_bot.find_comment_blank_of_post()
         ig_bot.find_share_button_of_post()
         ig_bot.view_all_stories()
-        ig_bot.view_story_of_user('username')
+        ig_bot.view_story_of_user('dpk99')
         ig_bot.view_all_suggestions()
