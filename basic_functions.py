@@ -12,9 +12,6 @@ class InstagramBot:
         self.username = username
         self.password = password
         self.base_url = 'https://www.instagram.com'
-        opts = Options()
-
-        opts.add_argument("user-agent=Chrome --- Android Mobile")
 
         self.driver = webdriver.Chrome('chromedriver.exe')
 
@@ -189,6 +186,6 @@ if __name__ == '__main__':
         ig_bot.find_like_button_of_post()
         ig_bot.find_comment_blank_of_post()
         ig_bot.find_share_button_of_post()
-        ig_bot.view_all_stories()
-        ig_bot.view_story_of_user('dpk99')
-        ig_bot.view_all_suggestions()
+        # ig_bot.view_all_stories()
+        # ig_bot.view_story_of_user('dpk99')
+        # ig_bot.view_all_suggestions()
